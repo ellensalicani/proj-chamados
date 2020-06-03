@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - VisualTicket</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @*<a href="@Url.Action("Index", "Home")" title="VisualTicket" class="navbar-brand">
+                    <img alt="VisualTicket" style="width: 60px; height: 60px; padding:unset; margin-bottom:20px" src="@Url.Content("~/Content/img/logo.png")">
+                </a>*@
+                @Html.ActionLink("VisualTicket", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
+                    <li class="nav-item dropdown" id="menu-assets">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Assets <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="itens-assets" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("Computadores", "Computadores", "Assets")</li>
+                            <li>@Html.ActionLink("Monitores", "Monitores", "Assets")</li>
+                            <li>@Html.ActionLink("Softwares", "Softwares", "Assets")</li>
+                            <li>@Html.ActionLink("Rede", "Rede", "Assets")</li>
+                            <li>@Html.ActionLink("Dispositivos", "Dispositivos", "Assets")</li>
+                            <li>@Html.ActionLink("Impressoras", "Rede", "Assets")</li>
+                            <li>@Html.ActionLink("Telefone", "Telefone", "Assets")</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown" id="menu-assets">
+                        <a class="nav-link dropdown-toggle" href="@Url.Action("Index","Assistencia")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Assistencia <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="itens-assets" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("Chamados", "ListarChamados", "Assistencia")</li>
+                            <li>@Html.ActionLink("Problemas", "Problemas", "Assistencia")</li>
+                            <li>@Html.ActionLink("Changes", "Changes", "Assistencia")</li>
+                        </ul>
+                    </li>
+                    @*<li>@Html.ActionLink("Gerencia", "Index", "Gerencia")</li>  @*licencas*@
+                    @if (Session["Perfil"].ToString() == "ADM")
+                    {
+                        <li class="nav-item dropdown" id="menu-assets">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administracao <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="itens-assets" aria-labelledby="navbarDropdown">
+                                <li>@Html.ActionLink("Usuários", "Usuarios", "Administracao")</li>
+                                <li>@Html.ActionLink("Perfis", "Perfis", "Administracao")</li>
+                            </ul>
+                        </li>
+                    }
+                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - VisualTicket</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿@model Infra.ViewModel.ChamadoViewModel
+@{
+    ViewBag.Title = "Editar Chamado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Chamado</h2>
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email Solicitante:</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tituloChamado">Titulo Chamado:</label>
+                        <input type="text" id="tituloChamado" value="@Model.Titulo" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="username">Usuário:</label>
+                        <input readonly type="text" id="username" value="@Session["UserName"].ToString()" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sistema">Sistema:</label>
+                        <input type="text" id="sistema" value="@Model.Sistema" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="prioridade">Prioridade:</label>
+                        <input type="text" id="prioridade" value="@Model.Prioridade" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="severidade">Severidade:</label>
+                        <input type="text" id="severidade" value="@Model.Severidade" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="aprovacao">Precisa de aprovação?</label>
+                        <input type="checkbox" class="form-check-input" value="@Model.PrecisaAprovacao" id="aprovacao">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="descricao">Descrição do Chamado:</label>
+                        <textarea class="form-control" id="descricao" value="@Model.Descricao" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <button type="submit" onclick="@Html.Action("EditarChamado","Assistencia", new { id = Model.Id })" class="btn btn-primary">Alterar Chamado</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
