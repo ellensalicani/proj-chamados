@@ -47,6 +47,14 @@ namespace VisualTicket.Entities
         [ForeignKey("FuncionarioId")]
         public virtual Funcionario Funcionario { get; set; }
 
+        public string ConcatDescricao
+        {
+            get
+            {
+                return string.Format("{0} - {1}", Id, Titulo);
+            }
+        }
+
         public Chamado(){
 
         }

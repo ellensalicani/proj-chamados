@@ -1,75 +1,88 @@
 ﻿@model Infra.ViewModel.ChamadoViewModel
+
 @{
     ViewBag.Title = "Criar Chamado";
 }
+
 <div class="jumbotron">
     <h3>Criar Chamado</h3>
 </div>
 <div class="card">
     <div class="card-body">
-        <form>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="email">Email Solicitante:</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+        @using (Html.BeginForm("CriarChamado", "Assistencia", FormMethod.Post, new { @class = "form-auth-small" }))
+        {
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Email, new { @readonly = true, @class = "form-control", @type = "email", @id = "email", @placeholder = "Email", @Value = @Session["EmailUsuario"].ToString() })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="tituloChamado">Titulo Chamado:</label>
-                        <input type="text" id="tituloChamado" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="username">Usuário:</label>
-                        <input readonly type="text" id="username" value="@Session["UserName"].ToString()" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="sistema">Sistema:</label>
-                        <input type="text" id="sistema" class="form-control">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Titulo, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control", @id = "tituloChamado", @placeholder = "Titulo Chamado", @type = "text" })
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="prioridade">Prioridade:</label>
-                        <input type="text" id="prioridade" class="form-control">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Funcionario.Username, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Funcionario.Username, new { @readonly = true, @class = "form-control", @type = "text", @placeholder = "Username Solicitante", @id = "username", @Value = @Session["UserName"].ToString() })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="severidade">Severidade:</label>
-                        <input type="text" id="severidade" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group form-check">
-                        <label class="form-check-label" for="aprovacao">Precisa de aprovação?</label>
-                        <input type="checkbox" class="form-check-input" id="aprovacao">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="descricao">Descrição do Chamado:</label>
-                        <textarea class="form-control" id="descricao" rows="3"></textarea>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Sistema, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Sistemas, new SelectList(Model.Sistemas, "Id", "Nome"), "Sistema", new { @class = "form-control", @id = "sistemaId" })
+                            @Html.HiddenFor(m => m.SistemaId, new { @id = "sId"})
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <button type="submit" onclick="@Html.Action("CriarChamado","Assistencia")" class="btn btn-primary">Criar Chamado</button>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Prioridade, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Prioridades, new SelectList(Model.Prioridades, "Id", "Descricao"), "Prioridade", new { @class = "form-control", @data_toggle = "tooltip", @data_placement = "top", @title = "Urgencia" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Severidade, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Severidades, new SelectList(Model.Severidades, "Id", "Descricao"), "Severidade", new { @class = "form-control", @data_toggle = "tooltip", @data_placement = "top", @title = "Impacto" })
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Descricao, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @id = "descricao", @type = "text", @placeholder = "Descrição Chamado", @rows = "3" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Criar Chamado</button>
+
+        }
     </div>
 </div>
 
+<script type="text/javascript">
+  $(function () {
+      $("#sistemaId").on("select", function () {
+          alert($(this).val());
+         $("#sId").val($(this).text());
+        alert($("#sId").val($(this).text()));
+    });
+});
+</script>

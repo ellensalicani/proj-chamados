@@ -41,6 +41,7 @@ namespace VisualTicket.Controllers
                 Session["UserName"] = user.Username;
                 Session["Perfil"] = user.PerfilAcesso;
                 Session["NomeUsuario"] = user.Nome;
+                Session["EmailUsuario"] = user.Email;
                 
                 return RedirectToAction("Index", "Home");
             }

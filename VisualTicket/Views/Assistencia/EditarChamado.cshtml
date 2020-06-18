@@ -7,69 +7,73 @@
 <h2>Editar Chamado</h2>
 <div class="card">
     <div class="card-body">
-        <form>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="email">Email Solicitante:</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+        @using (Html.BeginForm("EditarChamado", "Assistencia", FormMethod.Post, new { @class = "form-auth-small" }))
+        {
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Email, new { @readonly = true, @class = "form-control", @type = "email", @id = "email", @placeholder = "Email", @Value = Model.Email })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="tituloChamado">Titulo Chamado:</label>
-                        <input type="text" id="tituloChamado" value="@Model.Titulo" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="username">Usuário:</label>
-                        <input readonly type="text" id="username" value="@Session["UserName"].ToString()" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="sistema">Sistema:</label>
-                        <input type="text" id="sistema" value="@Model.Sistema" class="form-control">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Titulo, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control", @id = "tituloChamado", @placeholder = "Titulo Chamado", @type = "text", @Value = Model.Titulo })
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="prioridade">Prioridade:</label>
-                        <input type="text" id="prioridade" value="@Model.Prioridade" class="form-control">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Funcionario.Username, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Funcionario.Username, new { @readonly = true, @class = "form-control", @type = "text", @placeholder = "Username Solicitante", @id = "username", @Value = Model.Username })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="severidade">Severidade:</label>
-                        <input type="text" id="severidade" value="@Model.Severidade" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="form-group form-check">
-                        <label class="form-check-label" for="aprovacao">Precisa de aprovação?</label>
-                        <input type="checkbox" class="form-check-input" value="@Model.PrecisaAprovacao" id="aprovacao">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="descricao">Descrição do Chamado:</label>
-                        <textarea class="form-control" id="descricao" value="@Model.Descricao" rows="3"></textarea>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Sistema, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Sistemas, new SelectList(Model.Sistemas, "Id", "Nome"), @Model.Sistemas.FirstOrDefault(x => x.Id == Model.SistemaId).Nome, new { @class = "form-control", @id = "sistemaId", @Value = Model.SistemaId })
+                            @Html.HiddenFor(m => m.SistemaId, new { @id = "sId" })
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <button type="submit" onclick="@Html.Action("EditarChamado","Assistencia", new { id = Model.Id })" class="btn btn-primary">Alterar Chamado</button>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Prioridade, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Prioridades, new SelectList(Model.Prioridades, "Id", "Descricao"), Model.Prioridades.FirstOrDefault(x => x.Id == Model.PrioridadeId).Descricao, new { @class = "form-control", @data_toggle = "tooltip", @data_placement = "top", @title = "Urgencia", @Value = Model.PrioridadeId })
+                            @Html.HiddenFor(m => m.PrioridadeId, new { @id = "pId" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Severidade, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Severidades, new SelectList(Model.Severidades, "Id", "Descricao"), Model.Severidades.FirstOrDefault(x => x.Id == Model.SeveridadeId).Descricao, new { @class = "form-control", @data_toggle = "tooltip", @data_placement = "top", @title = "Impacto", @Value = Model.SeveridadeId })
+                            @Html.HiddenFor(m => m.SeveridadeId, new { @id = "sevId" })
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Descricao, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @id = "descricao", @type = "text", @placeholder = "Descrição Chamado", @rows = "3", @Value = Model.Descricao })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Alterar Chamado</button>
+
+        }
     </div>
 </div>
 

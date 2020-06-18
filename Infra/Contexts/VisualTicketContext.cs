@@ -7,6 +7,7 @@ using System.Web;
 using VisualTicket.Entities;
 using System.Data.Entity;
 using System.Data.Common;
+using Domain.Entities;
 
 namespace Infra.Contexts
 {
@@ -23,6 +24,8 @@ namespace Infra.Contexts
         public DbSet<Severidade> Severidades { get; set; }
         public DbSet<Sistema> Sistemas { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Problem> Problems { get; set; }
+        public DbSet<Change> Changes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -16,6 +16,9 @@ namespace VisualTicket.Entities
         [Column("username")]
         public string Username { get; set; }
 
+        [Column("email")]
+        public string Email { get; set; }
+
         [Column("senha")]
         public string Senha { get; set; }
 
@@ -44,7 +47,7 @@ namespace VisualTicket.Entities
 
         }
 
-        public Funcionario(string nome, string username, string senha, int id, int departamento, int cargo, string perfilAcesso)
+        public Funcionario(string nome, string username, string senha, int id, int departamento, int cargo, string perfilAcesso, string email)
         {
             CargoId = cargo;
             DepartamentoId = departamento;
@@ -53,6 +56,7 @@ namespace VisualTicket.Entities
             Username = username;
             Senha = senha;
             PerfilAcesso = perfilAcesso;
+            Email = email;
         }
 
     }

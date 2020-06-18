@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Infra.Services;
+using Infra.Services.Interfaces;
+using Infra.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +11,13 @@ namespace VisualTicket.Controllers
 {
     public class AdministracaoController : Controller
     {
+        private readonly IFuncionarioService _funcionarioService;
+
+        public AdministracaoController()
+        {
+            _funcionarioService = new FuncionarioService();
+        }
+
         // GET: Administracao
         public ActionResult Index()
         {
@@ -19,9 +29,21 @@ namespace VisualTicket.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Usuario()
         {
-            return View();
+            var listarFuncionarios = _funcionarioService.ListarFuncionarios();
+            var vm = listarFuncionarios.Select(x => new FuncionarioViewModel()
+            {
+                Cargo = x.Cargo,
+                Departamento = x.Departamento,
+                Email = x.Email,
+                Id = x.Id,
+                Nome = x.Nome,
+                Username = x.Username,
+                PerfilAcesso = x.PerfilAcesso
+            }).ToList();
+            return View(vm);
         }
     }
 }

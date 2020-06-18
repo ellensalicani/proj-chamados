@@ -23,8 +23,8 @@
             <th scope="col">Prioridade</th>
             <th scope="col">Severidade</th>
             <th scope="col">Sistema</th>
-            <th scope="col">Precisa de Aprovação?</th>
             <th scope="col">Usuário</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -33,14 +33,14 @@
             foreach (var chamado in Model)
             {
                 <tr>
-                    <td><a href="@Url.Action("CriarChamado","Assistencia", new { id = chamado.Id })">@Html.DisplayFor(modelItem => chamado.Id)</a></td>
+                    <td><a href="@Url.Action("EditarChamado","Assistencia", new { id = chamado.Id })">@Html.DisplayFor(modelItem => chamado.Id)</a></td>
                     <td>@Html.DisplayFor(modelItem => chamado.Titulo)</td>
                     <td>@Html.DisplayFor(modelItem => chamado.Descricao)</td>
-                    <td>@Html.DisplayFor(modelItem => chamado.Prioridade)</td>
-                    <td>@Html.DisplayFor(modelItem => chamado.Severidade)</td>
-                    <td>@Html.DisplayFor(modelItem => chamado.Sistema)</td>
-                    <td>@Html.DisplayFor(modelItem => chamado.PrecisaAprovacao)</td>
-                    <td>@Html.DisplayFor(modelItem => chamado.Funcionario)</td>
+                    <td>@Html.DisplayFor(modelItem => chamado.Prioridade.Descricao)</td>
+                    <td>@Html.DisplayFor(modelItem => chamado.Severidade.Descricao)</td>
+                    <td>@Html.DisplayFor(modelItem => chamado.Sistema.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => chamado.Funcionario.Nome)</td>
+                    <td><a href="@Url.Action("EditarChamado","Assistencia", new { id = chamado.Id })" title="Editar Chamado"><i class="fa fa-edit"></i></a></td>
                 </tr>
             }
         }

@@ -36,11 +36,12 @@ namespace Infra.Services
             {
                 Descricao = chamado.Descricao,
                 PrecisaAprovacao = chamado.PrecisaAprovacao,
-                FuncionarioId = chamado.Funcionario.Id,
-                PrioridadeId = chamado.Prioridade.Id,
-                SeveridadeId = chamado.Severidade.Id,
-                SistemaId = chamado.Sistema.Id,
-                Titulo = chamado.Titulo
+                FuncionarioId = chamado.FuncionarioId,
+                PrioridadeId = chamado.PrioridadeId,
+                SeveridadeId = chamado.SeveridadeId,
+                SistemaId = chamado.SistemaId,
+                Titulo = chamado.Titulo,
+                Id = chamado.Id
             };
             _repository.Update(c);
         }
@@ -51,10 +52,10 @@ namespace Infra.Services
             {
                 Descricao = chamado.Descricao,
                 PrecisaAprovacao = chamado.PrecisaAprovacao,
-                FuncionarioId = chamado.Funcionario.Id,
-                PrioridadeId = chamado.Prioridade.Id,
-                SeveridadeId = chamado.Severidade.Id,
-                SistemaId = chamado.Sistema.Id,
+                FuncionarioId = chamado.FuncionarioId,
+                PrioridadeId = chamado.PrioridadeId,
+                SeveridadeId = chamado.SeveridadeId,
+                SistemaId = chamado.SistemaId,
                 Titulo = chamado.Titulo
             };
 

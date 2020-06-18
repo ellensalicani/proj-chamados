@@ -72,9 +72,11 @@
   <ItemGroup>
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Chamado.cs" />
+    <Compile Include="Entities\Change.cs" />
     <Compile Include="Entities\Departamento.cs" />
     <Compile Include="Entities\Gerente.cs" />
     <Compile Include="Entities\Prioridade.cs" />
+    <Compile Include="Entities\Problem.cs" />
     <Compile Include="Entities\Severidade.cs" />
     <Compile Include="Entities\Sistema.cs" />
     <Compile Include="Entities\Funcionario.cs" />
